@@ -20,12 +20,10 @@ ENV LANG en_US.UTF-8
 ENV LC_CTYPE en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 RUN easy_install3 --upgrade gensim
+RUN pip3 install jupyter
+RUN apt-get install -y python3-matplotlib
+RUN pip3 install scikit-learn
 
-RUN mkdir /storage/
-WORKDIR /storage/
-ADD https://raw.githubusercontent.com/jdwittenauer/ipython-notebooks/master/Gensim.ipynb /storage/
-VOLUME /storage/
-
-EXPOSE 9000
-
-CMD ["ipython3", "notebook", "--no-browser", "--port", "9000", "--ip=*"]
+# docker build . -t gensim
+# docker run -it -v <some local directory>:/storage/ -p 9000:9000 gensim /bin/bash
+# jupyter notebook --no-browser --port 9000 --ip=*
